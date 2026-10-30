@@ -1,0 +1,878 @@
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+#root {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.app {
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    color: #222;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    position: relative;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 40px;
+
+    background-color: #212529;
+    color: white;
+
+    z-index: 100;
+}
+
+.navbar h2 {
+    margin: 0;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+.navbar button {
+    padding: 10px 18px;
+
+    margin-left: 10px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   SEARCH BAR
+========================= */
+
+.search-container {
+    position: relative;
+
+    width: 420px;
+
+    margin: 0 25px;
+}
+
+.search-form {
+    display: flex;
+
+    width: 100%;
+}
+
+.search-form input {
+    width: 100%;
+
+    min-width: 0;
+
+    padding: 11px 15px;
+
+    color: #222;
+
+    background-color: white;
+
+    border: 1px solid #cccccc;
+
+    border-radius: 6px 0 0 6px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+.search-form input::placeholder {
+    color: #777;
+}
+
+.search-form input:focus {
+    border-color: #007bff;
+
+    box-shadow:
+            0 0 0 2px
+            rgba(0, 123, 255, 0.15);
+}
+
+.search-form button {
+    margin-left: 0;
+
+    padding: 11px 20px;
+
+    color: white;
+
+    background-color: #007bff;
+
+    border: none;
+
+    border-radius: 0 6px 6px 0;
+
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
+}
+
+
+/* =========================
+   SEARCH DROPDOWN
+========================= */
+
+.search-dropdown {
+    position: absolute;
+
+    top: calc(100% + 6px);
+
+    left: 0;
+
+    width: 100%;
+
+    max-height: 360px;
+
+    overflow-y: auto;
+
+    color: #222;
+
+    background-color: white;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 8px;
+
+    box-shadow:
+            0 6px 20px
+            rgba(0, 0, 0, 0.2);
+
+    z-index: 1000;
+}
+
+
+/* Individual product result */
+
+.search-suggestion {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 12px;
+
+    color: #222;
+
+    background-color: white;
+
+    border-bottom: 1px solid #eeeeee;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+.search-suggestion:hover {
+    background-color: #f1f5fa;
+}
+
+.search-suggestion:last-child {
+    border-bottom: none;
+}
+
+
+/* Product image inside dropdown */
+
+.search-suggestion img {
+    width: 55px;
+
+    height: 55px;
+
+    flex-shrink: 0;
+
+    object-fit: contain;
+
+    padding: 3px;
+
+    background-color: #f8f8f8;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 6px;
+}
+
+
+/* Product details */
+
+.suggestion-information {
+    min-width: 0;
+
+    flex: 1;
+
+    text-align: left;
+}
+
+.search-suggestion h4 {
+    margin: 0 0 5px;
+
+    overflow: hidden;
+
+    color: #222;
+
+    font-size: 15px;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.search-suggestion p {
+    margin: 0 0 5px;
+
+    color: #777;
+
+    font-size: 12px;
+}
+
+.search-suggestion strong {
+    color: #007bff;
+
+    font-size: 14px;
+}
+
+
+/* Message when products are not found */
+
+.no-search-result {
+    margin: 0;
+
+    padding: 18px;
+
+    color: #777;
+
+    background-color: white;
+
+    text-align: center;
+}
+
+
+/* =========================
+   NAVBAR BUTTONS
+========================= */
+
+.nav-buttons {
+    display: flex;
+
+    align-items: center;
+
+    white-space: nowrap;
+}
+
+.nav-buttons button {
+    color: #222;
+
+    background-color: #f0f0f0;
+}
+
+.nav-buttons button:hover {
+    background-color: #dddddd;
+}
+
+
+/* =========================
+   PRODUCT LIST
+========================= */
+
+.product-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+    gap: 25px;
+
+    padding: 30px;
+}
+
+.product-card {
+    padding: 20px;
+
+    background-color: white;
+
+    border-radius: 10px;
+
+    box-shadow:
+            0 2px 10px
+            rgba(0, 0, 0, 0.1);
+
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+
+    height: 200px;
+
+    object-fit: contain;
+}
+
+.product-card h3 {
+    color: #222;
+}
+
+.product-card p {
+    color: #555;
+}
+
+.product-card button {
+    padding: 10px 20px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    color: white;
+
+    background-color: #007bff;
+
+    cursor: pointer;
+}
+
+.product-card button:hover {
+    background-color: #0056b3;
+}
+
+
+/* =========================
+   ADD PRODUCT PAGE
+========================= */
+
+.add-product-page {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    padding: 45px 20px;
+}
+
+
+/* White form container */
+
+.add-product-card {
+    width: 100%;
+
+    max-width: 700px;
+
+    padding: 40px;
+
+    background-color: white;
+
+    border-radius: 12px;
+
+    box-shadow:
+            0 3px 15px
+            rgba(0, 0, 0, 0.12);
+}
+
+
+/* Add New Product heading */
+
+.add-product-card h1 {
+    margin-top: 0;
+
+    margin-bottom: 12px;
+
+    color: #222;
+
+    text-align: center;
+}
+
+
+/* Text below heading */
+
+.form-description {
+    margin-top: 0;
+
+    margin-bottom: 40px;
+
+    color: #666;
+
+    text-align: center;
+}
+
+
+/* Complete product form */
+
+.product-form {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 28px;
+}
+
+
+/* Each label and input */
+
+.form-group {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* Labels */
+
+.form-group label {
+    margin-bottom: 10px;
+
+    color: #222;
+
+    font-size: 16px;
+
+    font-weight: bold;
+}
+
+
+/* Input and description boxes */
+
+.form-group input,
+.form-group textarea {
+    display: block;
+
+    width: 100%;
+
+    padding: 14px 16px;
+
+    color: #222;
+
+    background-color: white;
+
+    border: 1px solid #aaa;
+
+    border-radius: 7px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+
+/* Placeholder text */
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #888;
+}
+
+
+/* Blue border after clicking input */
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+
+    box-shadow:
+            0 0 0 2px
+            rgba(0, 123, 255, 0.15);
+}
+
+
+/* Description box */
+
+.form-group textarea {
+    min-height: 110px;
+
+    resize: vertical;
+}
+
+
+/* Two input fields side by side */
+
+.form-row {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 25px;
+}
+
+
+/* Product image input */
+
+.form-group input[type="file"] {
+    padding: 10px;
+
+    background-color: #f8f8f8;
+
+    cursor: pointer;
+}
+
+
+/* Choose File button */
+
+.form-group input[type="file"]::file-selector-button {
+    padding: 10px 15px;
+
+    margin-right: 15px;
+
+    color: white;
+
+    background-color: #555;
+
+    border: none;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+.image-preview-container {
+    width: 100%;
+
+    padding: 20px;
+
+    text-align: center;
+
+    background-color: #fafafa;
+
+    border: 2px dashed #bbb;
+
+    border-radius: 8px;
+}
+
+.image-preview-container p {
+    margin-top: 0;
+
+    font-weight: bold;
+}
+
+.image-preview {
+    width: 220px;
+
+    height: 180px;
+
+    object-fit: contain;
+
+    background-color: white;
+}
+
+
+/* =========================
+   CANCEL AND SUBMIT BUTTONS
+========================= */
+
+.form-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-top: 10px;
+}
+
+.form-actions button {
+    min-width: 130px;
+
+    padding: 12px 20px;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 6px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+
+/* Cancel button */
+
+.cancel-button {
+    background-color: #6c757d;
+}
+
+.cancel-button:hover {
+    background-color: #565e64;
+}
+
+
+/* Submit button */
+
+.submit-button {
+    background-color: #007bff;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.submit-button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   SUCCESS OR ERROR MESSAGE
+========================= */
+
+.form-message {
+    margin-top: 25px;
+
+    padding: 12px;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    background-color: #e8f5e9;
+
+    border-radius: 6px;
+}
+
+
+/* =========================
+   UPDATE AND DELETE BUTTONS
+========================= */
+
+.product-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+.product-buttons button {
+    margin: 0;
+
+    padding: 10px 15px;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.product-buttons .cart-button {
+    background-color: #007bff;
+}
+
+.product-buttons .update-button {
+    background-color: #4e64f0;
+}
+
+.product-buttons .delete-button {
+    background-color: #4e64f0;
+}
+
+.product-buttons .cart-button:hover {
+    background-color: #6b6375;
+}
+
+.product-buttons .update-button:hover {
+    background-color: #b52a37;
+}
+
+.product-buttons .delete-button:hover {
+    background-color: #b52a37;
+}
+
+
+/* =========================
+   LOADING AND ERROR MESSAGES
+========================= */
+
+.message {
+    margin-top: 50px;
+
+    color: #555;
+
+    text-align: center;
+}
+
+.error-message {
+    margin-top: 50px;
+
+    color: #dc3545;
+
+    text-align: center;
+}
+
+
+/* =========================
+   TABLET SCREEN
+========================= */
+
+@media screen and (max-width: 950px) {
+
+    .navbar {
+        padding: 15px 20px;
+    }
+
+    .search-container {
+        width: 330px;
+
+        margin: 0 15px;
+    }
+
+    .navbar button {
+        padding: 9px 12px;
+    }
+}
+
+
+/* =========================
+   MOBILE SCREEN
+========================= */
+
+@media screen and (max-width: 650px) {
+
+    .navbar {
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding: 20px;
+    }
+
+    .navbar h2 {
+        width: 100%;
+
+        text-align: center;
+    }
+
+
+    /* Full-width search bar */
+
+    .search-container {
+        width: 100%;
+
+        margin: 0;
+    }
+
+    .search-form {
+        width: 100%;
+    }
+
+    .search-form input {
+        min-width: 0;
+    }
+
+    .search-form button {
+        margin: 0;
+    }
+
+
+    /* Full-width dropdown */
+
+    .search-dropdown {
+        width: 100%;
+
+        max-height: 300px;
+    }
+
+    .search-suggestion {
+        padding: 10px;
+    }
+
+    .search-suggestion img {
+        width: 50px;
+
+        height: 50px;
+    }
+
+
+    /* Navbar buttons */
+
+    .nav-buttons {
+        display: flex;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+    }
+
+    .navbar button {
+        margin: 5px;
+    }
+
+
+    /* Add product page */
+
+    .add-product-page {
+        padding: 25px 12px;
+    }
+
+    .add-product-card {
+        padding: 25px 20px;
+    }
+
+
+    /* Input fields become separate */
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* Form buttons become vertical */
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+}
